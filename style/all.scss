@@ -1,0 +1,152 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*如果是用bs4已有內建此段語法*/
+*,*:before,*:after{
+              box-sizing:border-box;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  object-fit:cover;
+  /*下block 去除底下img buttom px用*/
+  display: block;
+}
+
+a{
+  display:inline-block;
+  text-decoration: none;
+  /*&:hover{}*/
+}
+/*用bs4加入以下兩個
+ul{
+  padding: 0;
+}
+
+ul,li{
+  list-style:none
+}*/
+
+body{
+  height: 100vh;
+}
+body{
+  display:flex;
+  align-items: center;
+  background-color: #003;
+}
+.container{
+  width: 1200px;
+  display: flex;
+  margin: 0 auto;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.staff_card{
+  width: 368px;//400px-(m15px*2)+(bd 1px*2)
+  margin: 15px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  transform:translateY(0px);//對應hover
+  transition: 0.5s;
+}
+.staff_card_img{
+  width: 100%;
+}
+.staff_card_conent{
+  padding: 20px;
+  position: relative;//記得給父層設為相對定位(relative)才不會跑出card外
+  &:before {//用偽類做出蓋在圖片上的透明板 左右角白色
+    content: '';
+    position: absolute;//設為絕對定位(absolute)才能蓋到圖片上
+    width: 0;
+    height: 0;
+    left: 0;
+    top: 0;
+    border-top: 50px solid transparent;//透明;
+    border-left: 184px solid #fff;//w368px 除2
+    border-right: 183px solid #fff;//w368px 除2
+    transform: translateY(-100%);//將偽類蓋到圖片上方 做成三角形的樣子
+  }
+}
+.staff_card_title{
+  font-size: 22px;
+  border-bottom: 1px solid #888;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  font-weight: 900;
+  transition: 0.3s;
+}
+.staff_card_text{
+  line-height: 1.5;
+  font-weight: 300;
+  transition: 0.3s;
+}
+
+//hover效果
+.staff_card{
+  &:hover{
+    transform:translateY(-50px);//讓card整個向上移動
+  }
+  &:hover .staff_card_conent{
+    background-image: linear-gradient(0deg, #5B00AE,#D3A4FF);//從底部開始,顏色#5B00AE到#D3A4FF漸層變色 由於linear-gradient不支援transition轉場效果 故無法在.staff_card加上transition
+  }
+  &:hover .staff_card_conent:before{
+    border-left: 184px solid #D3A4FF;
+    border-right: 183px solid #D3A4FF;
+  }
+  &:hover .staff_card_title{
+    color: #fff;
+    border-bottom: 1px solid #fff;
+  }
+  &:hover .staff_card_text{
+    color: #fff;
+  }
+}
